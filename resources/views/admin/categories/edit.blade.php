@@ -17,9 +17,9 @@
                 </div>
                 <div class="card-body">
                     @if(isset($category))
-                        <form action="{{ route('categories.update', $category->id) }}" method="POST">
+                        <form action="{{ route('categories.update', $category) }}" method="POST">
                             @csrf
-                            @method('PUT')
+                            {{-- @method('PUT') --}}
 
                             <div class="mb-3">
                                 <label for="name" class="form-label">Category Name <span class="text-danger">*</span></label>

@@ -29,7 +29,7 @@ class CategoryController extends Controller
         $categories = $this->categoryService->getAllCategoriesList();
         // TODO: Implement method to show categories list page
 
-        return view("category.index", data: compact("categories"));
+        return view("admin.categories.index",  compact("categories"));
     }
 
     /**
@@ -51,7 +51,7 @@ class CategoryController extends Controller
         $category = $this->categoryService->createCategory($request->validated());
 
         // TODO: Implement method to store new category
-        return redirect()->route('categories.index');
+        return redirect()->route('categories.index')->with('success','category created succssefully');
     }
 
     /**
@@ -60,8 +60,11 @@ class CategoryController extends Controller
     public function show(Category $category)
     {
         // TODO: Implement method to show single category
-        $categories = $this->categoryService->getCategoryById($category);
-        return view("category.show", compact("categories"));
+        //$categories = $this->categoryService->getCategoryById($category);
+                //return view("category.show", compact("categories"));
+                $category->load(['parent', 'children']);
+
+        return view("admin.categories.show", compact("category"));
     }
 
     /**
@@ -72,7 +75,7 @@ class CategoryController extends Controller
 
 
         // TODO: Implement method to show edit category form
-        return view("category.edit", ['category' => null, 'parentCategories' => collect($category->parentCategories)]);
+        return view("admin.categories.edit", ['category' => null, 'parentCategories' => collect($category->parentCategories)]);
     }
 
     /**
@@ -83,10 +86,11 @@ class CategoryController extends Controller
         
         $category = $this->categoryService->updateCategory($category, $request->validated());
 
-
+return redirect()->route('categories.show', $category->id)
+            ->with('success', 'Category updated successfully!');
 
         // TODO: Implement method to update category
-        return redirect()->route('categories.index');
+        //return redirect()->route('categories.index');
     }
 
     /**

@@ -10,7 +10,7 @@
             <div class="card">
                 <div class="card-header d-flex justify-content-between align-items-center">
                     <h3 class="card-title">Service Details</h3>
-                    <a href="{{ route('services.index') }}" class="btn btn-secondary">
+                    <a href="{{ route("services.show",$service) }}" class="btn btn-secondary">
                         <i class="fas fa-arrow-left"></i> Back to Services
                     </a>
                 </div>
@@ -53,7 +53,7 @@
                                     <tr>
                                         <th>Status</th>
                                         <td>
-                                            <form action="{{ route('', $service) }}" method="POST">
+                                            <form action="{{ route("services.update-status", $service) }}" method="POST">
                                                 @csrf
                                                 @method('PATCH')
                                                 <select name="status" class="form-select form-select-sm" onchange="this.form.submit()">

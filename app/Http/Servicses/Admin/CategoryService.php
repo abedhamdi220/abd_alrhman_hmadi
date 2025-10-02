@@ -19,15 +19,19 @@ class CategoryService
     }
 
 
+
     /**
      * TODO: Get category by ID
      *
      * @param int $id
      * @return Category
      */
-    public function getCategoryById(Category $category): Category
-    {
-        return Category::with(['parent', 'children'])->findOrFail($category->id);
+    public function getCategoryById(Category $category)
+     { 
+        
+        //return Category::with(['parent', 'children'])->findOrFail($category->id);
+        return Category::withCount(['services', 'children'])->findOrFail($category->id);
+        //return Category::with(['parent', 'children'])->findOrFail($category->id);
     }
 
     /**

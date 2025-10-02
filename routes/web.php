@@ -17,15 +17,16 @@ Route::middleware(['auth'])->group(function () {
     Route::get("dashboard", [DashboardController::class, "index"])->name("home");
 
     // Category Management Routes
-    Route::prefix('categories')->name('categories.')->group(function () {
-        Route::get('/', [CategoryController::class, 'index'])->name('index');
-        Route::get('/create', [CategoryController::class, 'create'])->name('create');
-        Route::post('/', [CategoryController::class, 'store'])->name('store');
-        Route::get('/{id}', [CategoryController::class, 'show'])->name('show');
-        Route::get('/{id}/edit', [CategoryController::class, 'edit'])->name('edit');
-        Route::put('/{id}', [CategoryController::class, 'update'])->name('update');
-        Route::delete('/{id}', [CategoryController::class, 'destroy'])->name('destroy');
-    });
+//   Route::prefix('categories')->name('categories.')->group(function () {
+//     Route::get('/', [CategoryController::class, 'index'])->name('index');
+//     Route::get('/create', [CategoryController::class, 'create'])->name('create');
+//     Route::post('/', [CategoryController::class, 'store'])->name('store');
+//     Route::get('/{category}', [CategoryController::class, 'show'])->name('show');
+//     Route::get('/{category}/edit', [CategoryController::class, 'edit'])->name('edit');
+//     Route::put('/{category}', [CategoryController::class, 'update'])->name('update');
+//     Route::delete('/{category}', [CategoryController::class, 'destroy'])->name('destroy');
+// });
+
 
     // Service Management Routes for Admin
 
@@ -35,7 +36,7 @@ Route::middleware(['auth'])->group(function () {
 Route::prefix('services')->name('services.')->group(function () {
     Route::get('/', [ServiceController::class, 'index'])->name('index');
     Route::get('/{service}', [ServiceController::class, 'show'])->name('show');
-    Route::patch('/{service}/status', [ServiceController::class, 'updateStatus'])->name('update-status'); // ✅ lowercase
+    Route::patch('/{service}/status', [ServiceController::class, 'updateStatus'])->name('update-status'); 
 });
 
 });
@@ -47,5 +48,5 @@ Route::prefix('services')->name('services.')->group(function () {
 //     });
 // });
 
-    // Route::resource('categories', CategoryController::class);
+     Route::resource('categories', CategoryController::class);
 

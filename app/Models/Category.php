@@ -19,4 +19,8 @@ class Category extends Model
     public function scopeParentId($query, $parentId){
         return $query->where("parent_id", $parentId);
     }
+     public function services()
+    {
+        return $this->hasMany(Service::class); 
+    }
 }
