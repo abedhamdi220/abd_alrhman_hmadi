@@ -24,8 +24,9 @@ class ServiceController extends Controller
      */
     public function index(Request $request)
     {
+        $service = $this->serviceService->getMyServicesList();
         // TODO: Implement API endpoint for provider's services
-        return $this->success(['data' => []], 'Services retrieved successfully.');
+        return $this->success(['data' => [$service ]], 'Services retrieved successfully.');
     }
 
     /**
@@ -33,6 +34,7 @@ class ServiceController extends Controller
      */
     public function show($id)
     {
+        $service = $this->serviceService->getServiceById($id);
         // TODO: Implement API endpoint to get single service for provider
         return $this->success(new ServiceResource(null), 'Service retrieved successfully.');
     }

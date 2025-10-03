@@ -18,7 +18,7 @@ return new class extends Migration
             // TODO: Implement table structure
                $table->id();                                   
             $table->string('description')->nullable();
-            $table->string('status')->default('active');                        
+            $table->enum('status',["pending","inactive","active"])->default('pending');                        
             $table->string('name')->unique();               
             $table->decimal('price', 10, 2);                
             $table->foreignId('provider_id')                

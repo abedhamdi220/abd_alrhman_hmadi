@@ -37,9 +37,11 @@ class CategoryController extends Controller
      */
     public function create(Request $request)
     {
+    
         // $categories = $this->categoryService->createCategory();
         // TODO: Implement method to show create category form
-        return view("admin.categories.create", ['parentCategories' => collect()]);
+        $categories = Category::whereNull("parent_id")->get();
+        return view("admin.categories.create", compact('categories'));
     }
 
     /**

@@ -3,6 +3,7 @@
 namespace App\Http\Servicses\Provider;
 
 use App\Models\Service;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Collection;
 
 class ServiceService
@@ -14,8 +15,9 @@ class ServiceService
      */
     public function getMyServicesList(): Collection
     {
+        $services = Service::with("provider","category")->get();
         // TODO: Implement method to get all services with relationships
-        return collect(); // Temporary return
+        return collect(  $services); // Temporary return
     }
 
     /**
@@ -26,6 +28,8 @@ class ServiceService
      */
     public function getServiceById(int $id): Service
     {
+
+        $service = Service::with("provider","category")->findOrFail($id);
         // TODO: Implement method to get service by ID with relationships
         throw new \Exception('Method not implemented'); // Temporary
     }
@@ -38,8 +42,17 @@ class ServiceService
      */
     public function createService(array $data): Service
     {
-        // TODO: Implement method to create a new service
-        throw new \Exception('Method not implemented'); // Temporary
+        return DB::transaction(function () use ($data) {
+            return Service::create($data);
+        });
+        
+
     }
+
+    
+
+        // TODO: Implement method to create a new service
+        // throw new \Exception('Method not implemented'); // Temporary
+    
 
 }

@@ -28,6 +28,13 @@ class ServiceStoreRequest extends FormRequest
         // Optional fields: description, price
         // Validation: valid category_id
         return [
+             "description"=> 'nullable|string',
+            "status"=> "required|in:pendin,active,inactive",
+            "name"=> "required|string|unique:services,name",
+            "price"=> "numeric|required",
+            "provider_id"=> "required|exists:providers,id",
+            "category_id"=> "required|exists:categories,id",
+
             // TODO: Add validation rules here
         ];
     }
@@ -41,6 +48,9 @@ class ServiceStoreRequest extends FormRequest
     {
         // TODO: Add custom validation messages
         return [
+           
+            
+
             // TODO: Add custom messages here
         ];
     }
